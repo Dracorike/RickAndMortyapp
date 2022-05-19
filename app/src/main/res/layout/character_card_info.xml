@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/black"
+    app:cardCornerRadius="@dimen/spacing_10"
+    android:layout_margin="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_10"
+        android:background="@color/black">
+        <ImageView
+            android:id="@+id/iv_character_card_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_launcher_foreground"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+            android:id="@+id/tv_character_card_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Rick sei lá das quantas"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/spacing_20"
+            android:layout_marginStart="@dimen/spacing_10"
+            app:layout_constraintStart_toEndOf="@id/iv_character_card_icon"
+            app:layout_constraintTop_toTopOf="@id/iv_character_card_icon"/>
+        <TextView
+            android:id="@+id/tv_character_card_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="macho Alpha"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/tv_character_card_name"
+            app:layout_constraintStart_toStartOf="@id/tv_character_card_name"/>
+        <TextView
+            android:id="@+id/tv_character_card_specie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Human"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/tv_character_card_gender"
+            app:layout_constraintStart_toStartOf="@id/tv_character_card_gender"/>
+        <ImageView
+            android:id="@+id/iv_character_card_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/status_value_icon_unknown"
+            android:layout_margin="15dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

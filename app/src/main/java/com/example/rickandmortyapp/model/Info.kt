@@ -1,0 +1,12 @@
+package com.example.rickandmortyapp.model
+
+import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class Info(
+    @SerializedName("count") val count:Int,
+    @SerializedName("pages") val pages:Int,
+    @SerializedName("next") val next:String?,
+    @SerializedName("prev") val prev:String?
+)
