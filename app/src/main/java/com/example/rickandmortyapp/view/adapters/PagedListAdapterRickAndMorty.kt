@@ -4,6 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortyapp.R
 import com.example.rickandmortyapp.databinding.CharacterCardInfoBinding
@@ -12,10 +14,44 @@ import com.example.rickandmortyapp.utils.CharacterInformationUtils
 import com.example.rickandmortyapp.utils.CharacterStatusManagerImplementation
 import com.squareup.picasso.Picasso
 
-class CharactersAdapter(
+class PagedListAdapterRickAndMorty(
     private val groupOfCharacters:List<CharactersModel>,
-    private val context: Context
-):RecyclerView.Adapter<CharactersAdapter.ViewHolder>() {
+    private val context:Context
+) :
+    PagedListAdapter<CharactersModel, PagedListAdapterRickAndMorty.ViewHolder>(DIFF_CALL_BACK) {
+
+    companion object{
+        private val DIFF_CALL_BACK = object : DiffUtil.ItemCallback<CharactersModel>(){
+            override fun areItemsTheSame(
+                oldItem: CharactersModel,
+                newItem: CharactersModel
+            ): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(
+                oldItem: CharactersModel,
+                newItem: CharactersModel
+            ): Boolean {
+                return oldItem.name == newItem.name
+            }
+
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater
+            .from(parent.context)
+            .inflate(R.layout.character_card_info, parent, false)
+        return ViewHolder(view)
+    }
+
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bindViewHolder(groupOfCharacters[position])
+    }
+
+
     inner class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
         private val binding = CharacterCardInfoBinding.bind(itemView)
 
@@ -40,16 +76,4 @@ class CharactersAdapter(
                 .getCharacterStatusIcon(status.uppercase())
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.character_card_info, parent, false)
-        return ViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindViewHolder(groupOfCharacters[position])
-    }
-
-    override fun getItemCount(): Int = groupOfCharacters.size
 }

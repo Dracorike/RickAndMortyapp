@@ -5,8 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import com.example.rickandmortyapp.model.CharactersModel
 import com.example.rickandmortyapp.repository.CharactersRepository
+import com.example.rickandmortyapp.repository.LiveDataSource
 import com.example.rickandmortyapp.utils.ERROR_VIEW_MODEL_CALL_ALLCHARACTERS
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -18,7 +21,16 @@ class ListOfCharactersViewModel @Inject constructor(
     private val repository: CharactersRepository
 ):ViewModel() {
     private var _listOfCharacters = MutableLiveData<List<CharactersModel>>()
-    val listOfCharacter:LiveData<List<CharactersModel>> get() = _listOfCharacters
+
+    val pagedList = LivePagedListBuilder(LiveDataSource<CharactersModel>(
+        _listOfCharacters.value.orEmpty()),
+        PagedList.Config.Builder()
+            .setPageSize(10)
+            .setPrefetchDistance(10)
+            .setInitialLoadSizeHint(10)
+            .setEnablePlaceholders(true)
+            .build()
+    ).build()
 
     fun initViewModel(){
         getListWithAllCharacters()

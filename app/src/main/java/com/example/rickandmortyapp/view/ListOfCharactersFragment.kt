@@ -7,16 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.rickandmortyapp.R
-import com.example.rickandmortyapp.databinding.ActivityMainBinding
 import com.example.rickandmortyapp.databinding.FragmentListOfCharactersBinding
 import com.example.rickandmortyapp.model.CharactersModel
-import com.example.rickandmortyapp.view.adapters.CharactersAdapter
+import com.example.rickandmortyapp.view.adapters.PagedListAdapterRickAndMorty
 import com.example.rickandmortyapp.viewmodel.ListOfCharactersViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class ListOfCharactersFragment : Fragment() {
@@ -46,17 +42,18 @@ class ListOfCharactersFragment : Fragment() {
         }
     }
 
-    private fun getAdapterRecyclerView(): CharactersAdapter {
-        return CharactersAdapter(groupOfCharacters, activity?.applicationContext as Context)
+    private fun getAdapterRecyclerView(): PagedListAdapterRickAndMorty {
+        return PagedListAdapterRickAndMorty(groupOfCharacters, activity?.applicationContext as Context)
     }
 
     private fun observeListOfCharacters() {
-        viewModel.listOfCharacter.observe(viewLifecycleOwner, {
-            with(groupOfCharacters){
+        viewModel.pagedList.observe(viewLifecycleOwner) {
+            with(groupOfCharacters) {
                 clear()
                 addAll(it)
             }
             populateRecyclerView()
-        })
+
+        }
     }
 }

@@ -43,6 +43,7 @@ dependencies {
     var picasso_version = "2.8"
     var retrofit_version = "2.9.0"
     var hilt_version = "2.42"
+    var paging_version = "2.1.2"
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
@@ -67,4 +68,5 @@ dependencies {
     kapt ("com.google.dagger:hilt-compiler:$hilt_version")
     kapt("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.3.0")
 
+    implementation("androidx.paging:paging-runtime:$paging_version")
 }
