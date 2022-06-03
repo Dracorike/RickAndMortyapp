@@ -1,6 +1,7 @@
 package com.example.rickandmortyapp.repository
 
 import com.example.rickandmortyapp.model.CharactersModel
+import com.example.rickandmortyapp.model.Info
 import com.example.rickandmortyapp.repository.datasource.CharacterDataSourceImp
 import dagger.Module
 import dagger.Provides
@@ -13,5 +14,13 @@ class CharactersRepository @Inject constructor(
 ) {
 
     fun getAllCharacters():List<CharactersModel> = dataSourceImp.getAllCharacters()
+    fun getInfoAboutPage():Info{
+        return try {
+            dataSourceImp.getInfoAboutCall()
+        }catch (ex:Exception){
+            ex.printStackTrace()
+            Info(0, 0, "", "")
+        }
+    }
 
 }

@@ -17,14 +17,14 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ListOfCharactersFragment : Fragment() {
     private lateinit var binding: FragmentListOfCharactersBinding
-    private val groupOfCharacters = arrayListOf<CharactersModel>()
+    private lateinit var adapterCharacters:PagedListAdapterRickAndMorty
     private val viewModel: ListOfCharactersViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentListOfCharactersBinding.inflate(inflater, container, false)
-
+        adapterCharacters = PagedListAdapterRickAndMorty(activity?.applicationContext as Context)
         initViewModel()
 
         return binding.root
@@ -33,25 +33,18 @@ class ListOfCharactersFragment : Fragment() {
     private fun initViewModel(){
         viewModel.initViewModel()
         observeListOfCharacters()
-
     }
     private fun populateRecyclerView() {
         binding.recyclerviewListOfCharacters.apply {
             layoutManager = LinearLayoutManager(activity)
-            adapter = getAdapterRecyclerView()
+            adapter = adapterCharacters
         }
     }
 
-    private fun getAdapterRecyclerView(): PagedListAdapterRickAndMorty {
-        return PagedListAdapterRickAndMorty(groupOfCharacters, activity?.applicationContext as Context)
-    }
 
     private fun observeListOfCharacters() {
         viewModel.pagedList.observe(viewLifecycleOwner) {
-            with(groupOfCharacters) {
-                clear()
-                addAll(it)
-            }
+            adapterCharacters.submitList(it)
             populateRecyclerView()
 
         }

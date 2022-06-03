@@ -15,7 +15,6 @@ import com.example.rickandmortyapp.utils.CharacterStatusManagerImplementation
 import com.squareup.picasso.Picasso
 
 class PagedListAdapterRickAndMorty(
-    private val groupOfCharacters:List<CharactersModel>,
     private val context:Context
 ) :
     PagedListAdapter<CharactersModel, PagedListAdapterRickAndMorty.ViewHolder>(DIFF_CALL_BACK) {
@@ -48,7 +47,7 @@ class PagedListAdapterRickAndMorty(
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindViewHolder(groupOfCharacters[position])
+        getItem(position)?.let { holder.bindViewHolder(it) }
     }
 
 
