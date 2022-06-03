@@ -1,7 +1,6 @@
 package com.example.rickandmortyapp.viewmodel
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,7 +9,6 @@ import androidx.paging.PagedList
 import com.example.rickandmortyapp.model.CharactersModel
 import com.example.rickandmortyapp.repository.CharacterDataSource
 import com.example.rickandmortyapp.repository.CharactersRepository
-import com.example.rickandmortyapp.repository.LiveDataSource
 import com.example.rickandmortyapp.utils.ERROR_VIEW_MODEL_CALL_ALLCHARACTERS
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

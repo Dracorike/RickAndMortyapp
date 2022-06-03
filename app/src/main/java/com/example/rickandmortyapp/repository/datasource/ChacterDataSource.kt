@@ -5,6 +5,7 @@ import com.example.rickandmortyapp.model.Info
 import com.example.rickandmortyapp.model.RickAndMortyResponse
 
 interface ChacterDataSource {
-    fun getAllCharacters():List<CharactersModel>
-    fun getInfoAboutCall():Info
+    fun getAllFirstsCharacters():List<CharactersModel>
+    fun getInfoAboutCall(page:Int):Info
+    fun getCharactersPerPage(page:Int):List<CharactersModel>
 }

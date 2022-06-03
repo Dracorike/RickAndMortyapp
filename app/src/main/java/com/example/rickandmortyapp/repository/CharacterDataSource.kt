@@ -1,6 +1,5 @@
 package com.example.rickandmortyapp.repository
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.DataSource
 import androidx.paging.ItemKeyedDataSource
@@ -22,6 +21,7 @@ class CharacterDataSource @Inject constructor(
         private val items: CharactersRepository
     ) : ItemKeyedDataSource<Int, CharactersModel>() {
         override fun getKey(item: CharactersModel): Int = 0
+        private var nextKey = 1
 
         override fun loadInitial(
             params: LoadInitialParams<Int>,
@@ -33,14 +33,16 @@ class CharacterDataSource @Inject constructor(
             }.start()
         }
 
-        override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<CharactersModel>) {}
+        override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<CharactersModel>) {
+            Thread {
+                nextKey +=1
+                val otherList = items.getCharactersPerPage(nextKey)
+                callback.onResult(otherList)
+            }.start()
+        }
 
         override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<CharactersModel>) {
-            Thread{
-                val list = items.getAllCharacters()
-                Log.i("TESTING", "Size of list: " + list.size)
-                callback.onResult(list)
-            }.start()
+
         }
 
     }
