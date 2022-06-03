@@ -9,8 +9,8 @@ import retrofit2.http.Query
 
 interface RickAndMortyEndPoints {
     @GET("character")
-    fun getCharacters():Call<RickAndMortyResponse>
+    fun getCharacters(): Call<RickAndMortyResponse>
 
     @GET("character")
-    fun getCharacterPerPage(@Query("page") page:Int):Call<RickAndMortyResponse>
+    fun getCharacterPerPage(@Query("page") page: Int): Call<RickAndMortyResponse>
 }

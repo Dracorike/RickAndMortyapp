@@ -15,12 +15,12 @@ import com.example.rickandmortyapp.utils.CharacterStatusManagerImplementation
 import com.squareup.picasso.Picasso
 
 class PagedListAdapterRickAndMorty(
-    private val context:Context
+    private val context: Context
 ) :
     PagedListAdapter<CharactersModel, PagedListAdapterRickAndMorty.ViewHolder>(DIFF_CALL_BACK) {
 
-    companion object{
-        private val DIFF_CALL_BACK = object : DiffUtil.ItemCallback<CharactersModel>(){
+    companion object {
+        private val DIFF_CALL_BACK = object : DiffUtil.ItemCallback<CharactersModel>() {
             override fun areItemsTheSame(
                 oldItem: CharactersModel,
                 newItem: CharactersModel
@@ -51,10 +51,10 @@ class PagedListAdapterRickAndMorty(
     }
 
 
-    inner class ViewHolder(itemView:View):RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = CharacterCardInfoBinding.bind(itemView)
 
-        fun bindViewHolder(character:CharactersModel) {
+        fun bindViewHolder(character: CharactersModel) {
             binding.tvCharacterCardName.text = character.name
             binding.tvCharacterCardGender.text = character.gender
             binding.tvCharacterCardSpecie.text = character.species
@@ -70,7 +70,7 @@ class PagedListAdapterRickAndMorty(
                 .into(binding.ivCharacterCardIcon)
         }
 
-        private fun statusToIcon(status:String):Int =
+        private fun statusToIcon(status: String): Int =
             CharacterInformationUtils(CharacterStatusManagerImplementation())
                 .getCharacterStatusIcon(status.uppercase())
     }

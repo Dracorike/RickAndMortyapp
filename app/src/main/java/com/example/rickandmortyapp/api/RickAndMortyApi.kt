@@ -23,5 +23,6 @@ object RickAndMortyApi {
 
 
     @Provides
-    fun getApiInstance():RickAndMortyEndPoints = getRetrofit().create(RickAndMortyEndPoints::class.java)
+    fun getApiInstance(): RickAndMortyEndPoints =
+        getRetrofit().create(RickAndMortyEndPoints::class.java)
 }

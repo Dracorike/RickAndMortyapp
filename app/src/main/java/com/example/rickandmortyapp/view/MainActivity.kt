@@ -23,11 +23,11 @@ class MainActivity : AppCompatActivity() {
         initFragmentOnActivity()
     }
 
-    private fun initVariables(){
+    private fun initVariables() {
         navController = findNavController(R.id.fragment_container_main)
     }
 
-    private fun initFragmentOnActivity(){
+    private fun initFragmentOnActivity() {
         navController.navigate(R.id.listOfCharactersFragment)
     }
 }

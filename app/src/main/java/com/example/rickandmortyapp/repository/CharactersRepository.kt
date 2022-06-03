@@ -10,14 +10,6 @@ class CharactersRepository @Inject constructor(
 ) {
 
     fun getAllCharacters():List<CharactersModel> = dataSourceImp.getAllFirstsCharacters()
-    fun getInfoAboutPage(page: Int):Info{
-        return try {
-            dataSourceImp.getInfoAboutCall(page)
-        }catch (ex:Exception){
-            ex.printStackTrace()
-            Info(0, 0, "", "")
-        }
-    }
     fun getCharactersPerPage(page:Int):List<CharactersModel> = dataSourceImp.getCharactersPerPage(page)
 
 }
