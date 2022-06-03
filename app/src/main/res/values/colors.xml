@@ -11,4 +11,6 @@
     <color name="alive">#18E104</color>
     <color name="dead">#F80606</color>
     <color name="unknown">#FFFFFF</color>
+
+    <color name="backgroud_color">#22152B</color>
 </resources>
